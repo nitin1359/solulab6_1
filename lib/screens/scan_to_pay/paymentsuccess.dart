@@ -8,8 +8,6 @@ class Paymentsuccess extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String formattedDateTime =
-        DateFormat('MMM d, yyyy · h:mm a').format(DateTime.now());
     return Scaffold(
       backgroundColor: const Color(0xff105D38),
       body: Stack(

@@ -64,7 +64,8 @@ class CategoryPainter extends CustomPainter {
     final radius = size.width / 2;
     final paint = Paint()
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 20;
+      ..strokeWidth = 16
+      ..strokeCap = StrokeCap.round;
 
     // Orange
     paint.color = const Color(0xffFFAE58);
