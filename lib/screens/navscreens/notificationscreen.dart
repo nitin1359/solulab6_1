@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:solulab6/custom_f_icon.dart';
 import 'package:solulab6/utils/common_widgets.dart';
 import 'package:solulab6/utils/custom_list_classes.dart';
+import 'package:get/get.dart';
+import 'package:solulab6/controller/bottom_nav_controller.dart';
 
 class Notificationscreen extends StatelessWidget {
-  const Notificationscreen({super.key});
+  Notificationscreen({super.key});
+  final BottomNavController _bottomNavController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +26,9 @@ class Notificationscreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       customBoxButton(
-                        onTap: () {},
+                        onTap: () {
+                          _bottomNavController.changeTabIndex(0);
+                        },
                         boxColor: const Color(0xff105D38),
                         icon: CustomFIcon.icon_10,
                         iconColor: Colors.white,

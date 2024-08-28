@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:solulab6/controller/bottom_nav_controller.dart';
 import 'package:solulab6/controller/statistic_controller.dart';
 import 'package:solulab6/custom_f_icon.dart';
 import 'package:solulab6/screens/chart/monthly_chart.dart';
@@ -8,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:solulab6/utils/custom_list_classes.dart';
 
 class StatsScreen extends StatelessWidget {
+  final BottomNavController _bottomNavController = Get.find();
   final StatisticController controller = Get.put(StatisticController());
 
   StatsScreen({super.key});
@@ -26,7 +28,9 @@ class StatsScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   customBoxButton(
-                    onTap: () {},
+                    onTap: () {
+                      _bottomNavController.changeTabIndex(0);
+                    },
                     boxColor: const Color(0xffFFFFFF),
                     icon: CustomFIcon.icon_10,
                     iconColor: const Color(0xff030319),

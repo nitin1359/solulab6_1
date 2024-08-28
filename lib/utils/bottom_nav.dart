@@ -27,7 +27,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
           const HomeScreen(),
           StatsScreen(),
            Scanqr(),
-          const Notificationscreen(),
+           Notificationscreen(),
           const ProfileScreen(),
         ],
       ),

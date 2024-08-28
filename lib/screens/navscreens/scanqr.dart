@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:solulab6/controller/bottom_nav_controller.dart';
 import 'package:solulab6/controller/scanner_controller.dart';
 import 'package:solulab6/custom_f_icon.dart';
 import 'package:solulab6/screens/scan_to_pay/scansummary.dart';
@@ -15,6 +16,7 @@ class Scanqr extends StatelessWidget {
 
   final ScannerAnimationController animationController =
       Get.put(ScannerAnimationController());
+  final BottomNavController _bottomNavController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,9 @@ class Scanqr extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     customBoxButton(
-                      onTap: () {},
+                      onTap: () {
+                        _bottomNavController.changeTabIndex(0);
+                      },
                       boxColor: const Color(0xff105D38),
                       icon: CustomFIcon.icon_10,
                       iconColor: const Color(0xffFFFFFF),
@@ -128,10 +132,11 @@ class Scanqr extends StatelessWidget {
                       onDetect: (capture) {
                         if (capture.barcodes.isNotEmpty) {
                           final barcode = capture.barcodes.first;
-                          Get.to(() => Scansummary(
+                          Get.to(
+                            () => Scansummary(
                               qrCodeData: barcode.rawValue ?? '',
-                            ),);
-                          
+                            ),
+                          );
                         }
                       },
                       fit: BoxFit.cover,
