@@ -18,18 +18,16 @@ class ScannerAnimationController extends GetxController {
 
 class ScanSummaryController extends GetxController {
   final TextEditingController amountController = TextEditingController();
-  var showAllCards = false.obs; // Observable to track card visibility
-  var amount = 0.0.obs; // Observable to store the amount
+  var showAllCards = false.obs; 
+  var amount = 0.0.obs; 
 
   void toggleCardVisibility() {
     showAllCards.value = !showAllCards.value;
   }
 
   void onAmountChanged(String value) {
-    // Remove any existing '$' and update the amount variable
     amount.value = double.tryParse(value.replaceAll('\$', '')) ?? 0.0;
 
-    // Update the text field with the formatted amount
     if (!value.startsWith('\$')) {
       final newText = '\$${value.replaceAll('\$', '')}';
       amountController.value = amountController.value.copyWith(

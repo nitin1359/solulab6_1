@@ -329,7 +329,7 @@ class StatsScreen extends StatelessWidget {
                                   const SizedBox(height: 4),
                                   customText(
                                     text:
-                                        '${recentExpenses[index]['date']}  •  ${recentExpenses[index]['time']}', // Ensure these are strings
+                                        '${recentExpenses[index]['date']}  •  ${recentExpenses[index]['time']}',
                                     color: const Color(0xff8F92A1),
                                     fontSize: 12,
                                   ),

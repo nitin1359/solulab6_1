@@ -27,7 +27,7 @@ class WeeklyChart extends StatelessWidget {
                 getTitlesWidget: (value, meta) {
                   return SideTitleWidget(
                     axisSide: meta.axisSide,
-                    space: 6, // title space keeping it 4 for now
+                    space: 6, // title space keeping it 6 for now
                     child: customText(
                       text: chartData[value.toInt()]['day'],
                       color: const Color(0xff8F92A1),
