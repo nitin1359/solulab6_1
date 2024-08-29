@@ -26,8 +26,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
         children: [
           const HomeScreen(),
           StatsScreen(),
-           Scanqr(),
-           Notificationscreen(),
+          Scanqr(),
+          Notificationscreen(),
           const ProfileScreen(),
         ],
       ),
@@ -68,11 +68,15 @@ class CustomBottomNavigationBar extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  _buildNavItem('assets/images/svg/nav1.svg', 0),
-                  _buildNavItem('assets/images/svg/nav2.svg', 1),
+                  _buildNavItem('assets/images/svg/nav1.svg',
+                      'assets/images/svg/home_nav.svg', 0),
+                  _buildNavItem('assets/images/svg/stats_nav1.svg',
+                      'assets/images/svg/nav2.svg', 1),
                   const SizedBox(width: 56), // For FAB space
-                  _buildNavItem('assets/images/svg/nav4.svg', 3),
-                  _buildNavItem('assets/images/svg/nav5.svg', 4),
+                  _buildNavItem('assets/images/svg/nav4.svg',
+                      'assets/images/svg/nav4.svg', 3),
+                  _buildNavItem('assets/images/svg/nav5.svg',
+                      'assets/images/svg/nav5.svg', 4),
                 ],
               ),
             ),
@@ -82,7 +86,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
     );
   }
 
-  Widget _buildNavItem(String svgPath, int index) {
+  Widget _buildNavItem(String svgPath1, String svgPath2, int index) {
     return InkWell(
       onTap: () {
         _bottomNavController.changeTabIndex(index);
@@ -93,13 +97,9 @@ class CustomBottomNavigationBar extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             SvgPicture.asset(
-              svgPath,
+              isSelected ? svgPath1 : svgPath2,
               height: 24,
               width: 24,
-              colorFilter: ColorFilter.mode(
-                isSelected ? const Color(0xFF105D38) : const Color(0xFFBDBDBD),
-                BlendMode.srcIn,
-              ),
             ),
           ],
         );
