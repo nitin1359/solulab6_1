@@ -108,6 +108,7 @@ class Notificationscreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     ListView.builder(
+                      padding: EdgeInsets.zero,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: 4,
@@ -191,6 +192,7 @@ class Notificationscreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     ListView.builder(
+                      padding: EdgeInsets.zero,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: 2,

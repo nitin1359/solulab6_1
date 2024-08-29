@@ -304,6 +304,7 @@ class StatsScreen extends StatelessWidget {
                 height: 146,
                 child: Expanded(
                   child: ListView.builder(
+                    padding: EdgeInsets.zero,
                     itemCount: recentExpenses.length,
                     itemBuilder: (context, index) {
                       return Padding(
