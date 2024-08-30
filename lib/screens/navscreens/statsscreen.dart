@@ -249,7 +249,8 @@ class StatsScreen extends StatelessWidget {
               const SizedBox(height: 8),
               Align(
                 alignment: Alignment.center,
-                child: controller.buildCategoryGraph(),
+                child: controller.buildIncomeGraph(),
+                // controller.buildCategoryGraph(),
               ),
               const SizedBox(height: 24),
               customText(
@@ -261,54 +262,58 @@ class StatsScreen extends StatelessWidget {
               const SizedBox(height: 16),
               SizedBox(
                 height: 146,
-                child: Expanded(
-                  child: ListView.builder(
-                    padding: EdgeInsets.zero,
-                    itemCount: recentExpenses.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 16.0),
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              recentExpenses[index]['icon'],
-                              height: 48,
-                              width: 48,
-                            ),
-                            const SizedBox(width: 16),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  customText(
-                                    text: recentExpenses[index]['name'],
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                    color: const Color(0xff030319),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: ListView.builder(
+                        padding: EdgeInsets.zero,
+                        itemCount: recentExpenses.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 16.0),
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  recentExpenses[index]['icon'],
+                                  height: 48,
+                                  width: 48,
+                                ),
+                                const SizedBox(width: 16),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      customText(
+                                        text: recentExpenses[index]['name'],
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700,
+                                        color: const Color(0xff030319),
+                                      ),
+                                      const SizedBox(height: 4),
+                                      customText(
+                                        text:
+                                            '${recentExpenses[index]['date']}  •  ${recentExpenses[index]['time']}',
+                                        color: const Color(0xff8F92A1),
+                                        fontSize: 12,
+                                      ),
+                                    ],
                                   ),
-                                  const SizedBox(height: 4),
-                                  customText(
-                                    text:
-                                        '${recentExpenses[index]['date']}  •  ${recentExpenses[index]['time']}',
-                                    color: const Color(0xff8F92A1),
-                                    fontSize: 12,
-                                  ),
-                                ],
-                              ),
+                                ),
+                                customText(
+                                  text: recentExpenses[index]['amount'] < 0
+                                      ? '-\$${recentExpenses[index]['amount'].abs().toStringAsFixed(2)}'
+                                      : '\$${recentExpenses[index]['amount'].toStringAsFixed(2)}',
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                  color: const Color(0xff030319),
+                                ),
+                              ],
                             ),
-                            customText(
-                              text: recentExpenses[index]['amount'] < 0
-                                  ? '-\$${recentExpenses[index]['amount'].abs().toStringAsFixed(2)}'
-                                  : '\$${recentExpenses[index]['amount'].toStringAsFixed(2)}',
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                              color: const Color(0xff030319),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               )
             ],

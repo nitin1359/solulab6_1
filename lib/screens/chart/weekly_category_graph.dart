@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:solulab6/controller/statistic_controller.dart';
+import 'package:solulab6/utils/common_widgets.dart';
 
 class WeeklyCategoryGraph extends StatelessWidget {
   final List<Map<String, dynamic>> weeklyData;
@@ -103,8 +104,8 @@ Widget categoryIndicator({required String text, required Color color}) {
   return Row(
     children: [
       Container(
-        width: 10,
-        height: 10,
+        width: 6,
+        height: 6,
         decoration: BoxDecoration(
           color: color,
           shape: BoxShape.circle,
@@ -171,18 +172,3 @@ class CategoryPainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
 
-Widget customText({
-  required String text,
-  double fontSize = 14,
-  FontWeight fontWeight = FontWeight.normal,
-  Color color = Colors.black,
-}) {
-  return Text(
-    text,
-    style: TextStyle(
-      fontSize: fontSize,
-      fontWeight: fontWeight,
-      color: color,
-    ),
-  );
-}

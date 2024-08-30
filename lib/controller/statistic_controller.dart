@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:solulab6/screens/chart/weekly_category_graph.dart';
+import 'package:solulab6/screens/chart/weekly_income_graph.dart';
 
 class StatisticController extends GetxController {
   final RxString _selectedView = 'Weekly'.obs;
@@ -24,6 +25,18 @@ class StatisticController extends GetxController {
     {'week': 'Week 2', 'income': 1000.0, 'expense': 600.0},
     {'week': 'Week 3', 'income': 1800.0, 'expense': 700.0},
     {'week': 'Week 4', 'income': 1500.0, 'expense': 200.0},
+  ];
+
+
+  final List<Map<String, dynamic>> weeklyIncomeData = [
+    {'source': 'Salary', 'amount': 2000.0},
+    {'source': 'Freelancing', 'amount': 500.0},
+    {'source': 'Investments', 'amount': 150.0},
+    {'source': 'Rental Income', 'amount': 800.0},
+    {'source': 'Side Hustle', 'amount': 300.0},
+    {'source': 'Gifts', 'amount': 50.0},
+    {'source': 'Other', 'amount': 100.0},
+    {'source': 'Other1', 'amount': 100.0},
   ];
 
   final RxDouble _weeklyTotalIncome = 0.0.obs;
@@ -90,6 +103,10 @@ class StatisticController extends GetxController {
 
   Widget buildCategoryGraph() {
     return WeeklyCategoryGraph(weeklyData: weeklyChartData);
+  }
+
+  Widget buildIncomeGraph() {
+    return WeeklyIncomeGraph(weeklyIncomeData: weeklyIncomeData);
   }
 
   Rx<double> getTotalIncome() {
