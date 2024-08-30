@@ -141,30 +141,6 @@ Widget todayContainer() {
   );
 }
 
-Widget categoryIndicator({
-  required String text,
-  required Color color,
-}) {
-  return Row(
-    children: [
-      Container(
-        height: 6,
-        width: 6,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(50),
-          color: color,
-        ),
-      ),
-      const SizedBox(width: 8),
-      customText(
-        text: text,
-        fontWeight: FontWeight.w500,
-        color: color,
-      ),
-    ],
-  );
-}
-
 Widget wideButton({
   required String text,
   required VoidCallback onTap,

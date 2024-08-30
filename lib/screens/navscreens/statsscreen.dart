@@ -247,50 +247,9 @@ class StatsScreen extends StatelessWidget {
                 color: const Color(0xff030319),
               ),
               const SizedBox(height: 8),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  customText(
-                      text: 'Last 7 days expenses',
-                      fontSize: 16,
-                      color: const Color(0xff8F92A1)),
-                  Obx(
-                    () => customText(
-                      text: controller.weeklyTotal < 0
-                          ? '-\$${controller.weeklyTotal.abs().toStringAsFixed(2)}'
-                          : '\$${controller.weeklyTotal.toStringAsFixed(2)}',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      color: const Color(0xff030319),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 32),
               Align(
                 alignment: Alignment.center,
                 child: controller.buildCategoryGraph(),
-              ),
-              const SizedBox(height: 24),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    categoryIndicator(
-                      text: 'Transportation',
-                      color: const Color(0xffFFAE58),
-                    ),
-                    categoryIndicator(
-                      text: 'Shopping',
-                      color: const Color(0xff4CD080),
-                    ),
-                    categoryIndicator(
-                      text: 'Coffee',
-                      color: const Color(0xff105D38),
-                    ),
-                  ],
-                ),
               ),
               const SizedBox(height: 24),
               customText(

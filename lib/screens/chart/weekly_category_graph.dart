@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:solulab6/controller/statistic_controller.dart';
 
 class WeeklyCategoryGraph extends StatelessWidget {
   final List<Map<String, dynamic>> weeklyData;
@@ -25,26 +27,93 @@ class WeeklyCategoryGraph extends StatelessWidget {
       }
     }
 
-    return SizedBox(
-      width: 200,
-      height: 200,
-      child: Stack(
-        children: [
-          CustomPaint(
-            size: const Size(200, 200),
-            painter: CategoryPainter(
-              transportation: transportation / total,
-              shopping: shopping / total,
-              coffee: coffee / total,
+    Map<String, Color> categoryColors = {};
+    for (var day in weeklyData) {
+      if (weeklyData.indexOf(day) % 3 == 0) {
+        categoryColors['Transportation'] = const Color(0xffFFAE58);
+      } else if (weeklyData.indexOf(day) % 3 == 1) {
+        categoryColors['Shopping'] = const Color(0xff4CD080);
+      } else {
+        categoryColors['Coffee'] = const Color(0xff105D38);
+      }
+    }
+
+    final StatisticController controller = Get.find();
+
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            customText(
+                text: 'Last 7 days expenses',
+                fontSize: 16,
+                color: const Color(0xff8F92A1)),
+            Obx(
+              () => customText(
+                text: controller.weeklyTotal < 0
+                    ? '-\$${controller.weeklyTotal.abs().toStringAsFixed(2)}'
+                    : '\$${controller.weeklyTotal.toStringAsFixed(2)}',
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                color: const Color(0xff030319),
+              ),
             ),
+          ],
+        ),
+        const SizedBox(height: 32),
+        SizedBox(
+          width: 200,
+          height: 200,
+          child: Stack(
+            children: [
+              CustomPaint(
+                size: const Size(200, 200),
+                painter: CategoryPainter(
+                  transportation: transportation / total,
+                  shopping: shopping / total,
+                  coffee: coffee / total,
+                ),
+              ),
+              Center(
+                child: SvgPicture.asset('assets/images/svg/coffee.svg'), 
+              ),
+            ],
           ),
-          Center(
-            child: SvgPicture.asset('assets/images/svg/coffee.svg'),
+        ),
+        const SizedBox(height: 32),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: categoryColors.entries.map((entry) {
+              return categoryIndicator(
+                text: entry.key,
+                color: entry.value,
+              );
+            }).toList(),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
+}
+
+Widget categoryIndicator({required String text, required Color color}) {
+  return Row(
+    children: [
+      Container(
+        width: 10,
+        height: 10,
+        decoration: BoxDecoration(
+          color: color,
+          shape: BoxShape.circle,
+        ),
+      ),
+      const SizedBox(width: 8),
+      Text(text),
+    ],
+  );
 }
 
 class CategoryPainter extends CustomPainter {
@@ -67,7 +136,7 @@ class CategoryPainter extends CustomPainter {
       ..strokeWidth = 16
       ..strokeCap = StrokeCap.round;
 
-    // Orange
+    // Orange (Transportation)
     paint.color = const Color(0xffFFAE58);
     canvas.drawArc(
       Rect.fromCircle(center: center, radius: radius),
@@ -77,7 +146,7 @@ class CategoryPainter extends CustomPainter {
       paint,
     );
 
-    // Shopping
+    // Green (Shopping)
     paint.color = const Color(0xff4CD080);
     canvas.drawArc(
       Rect.fromCircle(center: center, radius: radius),
@@ -87,7 +156,7 @@ class CategoryPainter extends CustomPainter {
       paint,
     );
 
-    // Coffee
+    // Dark Green (Coffee)
     paint.color = const Color(0xff105D38);
     canvas.drawArc(
       Rect.fromCircle(center: center, radius: radius),
@@ -100,4 +169,20 @@ class CategoryPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
+Widget customText({
+  required String text,
+  double fontSize = 14,
+  FontWeight fontWeight = FontWeight.normal,
+  Color color = Colors.black,
+}) {
+  return Text(
+    text,
+    style: TextStyle(
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      color: color,
+    ),
+  );
 }
