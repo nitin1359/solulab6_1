@@ -77,7 +77,7 @@ class WeeklyCategoryGraph extends StatelessWidget {
                 ),
               ),
               Center(
-                child: SvgPicture.asset('assets/images/svg/coffee.svg'), 
+                child: SvgPicture.asset('assets/images/svg/coffee.svg'),
               ),
             ],
           ),
@@ -112,7 +112,12 @@ Widget categoryIndicator({required String text, required Color color}) {
         ),
       ),
       const SizedBox(width: 8),
-      Text(text),
+      customText(
+        text: text,
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        color: color,
+      ),
     ],
   );
 }
@@ -171,4 +176,3 @@ class CategoryPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
-

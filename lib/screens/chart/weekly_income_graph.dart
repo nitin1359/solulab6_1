@@ -149,7 +149,12 @@ Widget categoryIndicator({required String text, required Color color}) {
         ),
       ),
       const SizedBox(width: 8),
-      Text(text),
+      customText(
+        text: text,
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        color: color,
+      ),
     ],
   );
 }

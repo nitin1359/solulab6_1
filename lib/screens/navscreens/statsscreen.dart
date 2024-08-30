@@ -239,7 +239,7 @@ class StatsScreen extends StatelessWidget {
                                 ),
                                 child: Center(
                                   child: customText(
-                                    text: 'Expense',
+                                    text: 'Expenses',
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
                                     color: controller.selectedTab.value == 1
