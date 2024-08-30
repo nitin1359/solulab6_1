@@ -5,6 +5,7 @@ import 'package:solulab6/screens/chart/weekly_income_graph.dart';
 
 class StatisticController extends GetxController {
   final RxString _selectedView = 'Weekly'.obs;
+  final RxInt selectedTab = 0.obs;
   String get selectedView => _selectedView.value;
   set selectedView(String value) => _selectedView.value = value;
 
@@ -27,7 +28,6 @@ class StatisticController extends GetxController {
     {'week': 'Week 4', 'income': 1500.0, 'expense': 200.0},
   ];
 
-
   final List<Map<String, dynamic>> weeklyIncomeData = [
     {'source': 'Salary', 'amount': 2000.0},
     {'source': 'Freelancing', 'amount': 500.0},
@@ -35,8 +35,8 @@ class StatisticController extends GetxController {
     {'source': 'Rental Income', 'amount': 800.0},
     {'source': 'Side Hustle', 'amount': 300.0},
     {'source': 'Gifts', 'amount': 50.0},
+    {'source': 'Bonus', 'amount': 100.0},
     {'source': 'Other', 'amount': 100.0},
-    {'source': 'Other1', 'amount': 100.0},
   ];
 
   final RxDouble _weeklyTotalIncome = 0.0.obs;

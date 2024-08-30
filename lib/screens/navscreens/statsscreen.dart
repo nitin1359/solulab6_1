@@ -191,51 +191,68 @@ class StatsScreen extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Container(
-                          height: 46,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            color: controller.weeklyTotal < 0
-                                ? const Color(0xffF2F2F2)
-                                : const Color(0xffFFFFFF),
+                  child: SizedBox(
+                    height: 54,
+                    child: Obx(
+                      () => Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () {
+                                controller.selectedTab.value = 0;
+                              },
+                              child: Container(
+                                height: 46,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: controller.selectedTab.value == 0
+                                      ? const Color(0xffFFFFFF)
+                                      : const Color(0xffF2F2F2),
+                                ),
+                                child: Center(
+                                  child: customText(
+                                    text: 'Income',
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    color: controller.selectedTab.value == 0
+                                        ? const Color(0xff105D38)
+                                        : const Color(0xffBDBDBD),
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
-                          child: Center(
-                            child: customText(
-                                text: 'Income',
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: controller.weeklyTotal < 0
-                                    ? const Color(0xffBDBDBD)
-                                    : const Color(0xff105D38)),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () {
+                                controller.selectedTab.value = 1;
+                              },
+                              child: Container(
+                                height: 46,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: controller.selectedTab.value == 1
+                                      ? const Color(0xffFFFFFF)
+                                      : const Color(0xffF2F2F2),
+                                ),
+                                child: Center(
+                                  child: customText(
+                                    text: 'Expense',
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    color: controller.selectedTab.value == 1
+                                        ? const Color(0xff105D38)
+                                        : const Color(0xffBDBDBD),
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: Container(
-                          height: 46,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            color: controller.weeklyTotal < 0
-                                ? const Color(0xffFFFFFF)
-                                : const Color(0xffF2F2F2),
-                          ),
-                          child: Center(
-                            child: customText(
-                                text: 'Expense',
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: controller.weeklyTotal < 0
-                                    ? const Color(0xff105D38)
-                                    : const Color(0xffBDBDBD)),
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),
@@ -247,10 +264,13 @@ class StatsScreen extends StatelessWidget {
                 color: const Color(0xff030319),
               ),
               const SizedBox(height: 8),
-              Align(
-                alignment: Alignment.center,
-                child: controller.buildIncomeGraph(),
-                // controller.buildCategoryGraph(),
+              Obx(
+                () => Align(
+                  alignment: Alignment.center,
+                  child: controller.selectedTab.value == 0
+                      ? controller.buildIncomeGraph()
+                      : controller.buildCategoryGraph(),
+                ),
               ),
               const SizedBox(height: 24),
               customText(
@@ -281,7 +301,8 @@ class StatsScreen extends StatelessWidget {
                                 const SizedBox(width: 16),
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       customText(
                                         text: recentExpenses[index]['name'],
